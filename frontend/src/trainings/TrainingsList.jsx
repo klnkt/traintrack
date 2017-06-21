@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import List from '../list/List';
 import './TrainingsList.css';
 
@@ -21,10 +22,17 @@ class TrainingsList extends React.Component {
   render() {
     return (
       <div className="TrainingsList">
-        <List items={this.state.trainings} root="/trainings" />
+        <List items={this.state.trainings} root="/trainings" onClick={this.props.onClick} />
       </div>
     );
   }
 }
+
+TrainingsList.propTypes = {
+  onClick: PropTypes.func,
+};
+TrainingsList.defaultProps = {
+  onClick: () => {},
+};
 
 export default TrainingsList;
