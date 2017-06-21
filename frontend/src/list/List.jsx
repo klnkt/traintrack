@@ -1,38 +1,33 @@
 import React from 'react';
-import { Link, Route } from 'react-router-dom';
-import Training from '../training/Training';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import './List.css';
 
-class List extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      trainings: [
-        {
-          id: 1,
-          title: 'foo',
-        },
-        {
-          id: 2,
-          title: 'bar',
-        },
-      ],
-    };
-  }
-  render() {
-    return (
-      <div className="List">
-          I am a list
-          {this.state.trainings.map(training =>
-            (<div className="List-item">
-              <Link to={`/list/${training.id}`}>{training.title}</Link>
-            </div>))
-          }
-        <Route path="/list/:id" component={Training} />
-      </div>
-    );
-  }
+function List(props) {
+  return (
+    <div className="List">
+        I am a list
+        {props.items.map(item =>
+          (<div className="List-item">
+            <Link to={`${props.root}/${item.id}`}>{item.title}</Link>
+          </div>))
+        }
+    </div>
+  );
 }
 
+List.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      title: PropTypes.string,
+    }),
+  ),
+  root: PropTypes.string,
+};
+List.defaultProps = {
+  items: [],
+  root: '/',
+};
 export default List;
