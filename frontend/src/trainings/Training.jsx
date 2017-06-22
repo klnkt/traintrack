@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TrainingsStore from './TrainingsStore';
+import history from '../history';
 
 import './Training.css';
 
@@ -64,6 +65,9 @@ class Training extends React.Component {
           /> :
           <span>{this.state.item.title}</span>}
         {this.getControls()}
+        <button onClick={() => history.goBack()}>
+          Go back
+        </button>
       </div>
     );
   }
