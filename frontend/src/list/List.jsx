@@ -1,17 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 import './List.css';
-
+/* eslint "react/no-unused-prop-types":0 */
 function List(props) {
   return (
     <div className="List">
         I am a list
-        {props.items.map(item =>
-          (<div className="List-item">
-            <Link to={`${props.root}/${item.id}`}>{item.title}</Link>
-          </div>))
+        {
+          props.items.map(item =>
+            (<div className="List-item">
+              <button onClick={() => props.onItemClick(item.id)}>{item.title} {item.isAdded ? 'true' : 'false'}
+              </button>
+            </div>),
+          )
         }
     </div>
   );
@@ -24,10 +26,10 @@ List.propTypes = {
       title: PropTypes.string,
     }),
   ),
-  root: PropTypes.string,
+  onItemClick: PropTypes.func,
 };
 List.defaultProps = {
   items: [],
-  root: '/',
+  onItemClick: null,
 };
 export default List;

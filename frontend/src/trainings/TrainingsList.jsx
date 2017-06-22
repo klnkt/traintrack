@@ -22,17 +22,17 @@ class TrainingsList extends React.Component {
   render() {
     return (
       <div className="TrainingsList">
-        <List items={this.state.trainings} root="/trainings" onClick={this.props.onClick} />
+        <List items={this.state.trainings} root="/trainings" onItemClick={this.props.onItemClick} />
       </div>
     );
   }
 }
 
 TrainingsList.propTypes = {
-  onClick: PropTypes.func,
+  onItemClick: PropTypes.func,
 };
 TrainingsList.defaultProps = {
-  onClick: () => {},
+  onItemClick: null,
 };
 
 export default TrainingsList;
