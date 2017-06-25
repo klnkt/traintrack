@@ -1,51 +1,87 @@
-import { Link, Route, Router } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 import history from './history';
 
 import List from './list/List';
-import traintrackApp from './ReducersConfig';
-import Training from './trainings/Training';
-import Exercise from './exercises/Exercise';
-import TrainingsList from './trainings/TrainingsList';
-import ExercisesList from './exercises/ExercisesList';
-import AddExercisesList from './exercises/AddExercisesList';
+import reducersConfig from './ReducersConfig';
+import RTraining from './trainings/training/RTraining';
+import Exercise from './exercises/exercise/Exercise';
+import RTrainingsList from './trainings/trainings-list/RTrainingsList';
+import RExercisesList from './exercises/exercises-list/RExercisesList';
+import RAddExercisesList from './exercises/add-exercises/RAddExercisesList';
 
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  let store = createStore(traintrackApp);
+  const store = createStore(
+    reducersConfig,
+    {
+      exercises: [{
+        id: 1,
+        title: 'foo',
+      },
+      {
+        id: 2,
+        title: 'bar',
+      },
+      {
+        id: 3,
+        title: 'baz',
+      },
+      {
+        id: 4,
+        title: 'qqq',
+      }],
+      trainings: [
+        {
+          id: 1,
+          title: 'first training',
+          exerciseIds: [1, 2],
+        },
+        {
+          id: 2,
+          title: 'second training',
+          exerciseIds: [3, 4],
+        },
+      ],
+    },
+    applyMiddleware(routerMiddleware(history)),
+  );
   return (
-    <Router history={history}>
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <div className="App">
+          <div className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <h2>Welcome to React</h2>
+          </div>
+          <p className="App-intro">
+            To get started, edit <code>src/App.js</code> and save to reload.
+          </p>
+          <nav>
+            <p>
+              <Link to="/">Index</Link>
+            </p>
+            <p>
+              <Link to="/trainings">trainings</Link>
+            </p>
+            <p>
+              <Link to="/exercises">exercises</Link>
+            </p>
+          </nav>
+          <Route path="/list" component={List} />
+          <Route path="/exercises" exact component={RExercisesList} />
+          <Route path="/trainings" exact component={RTrainingsList} />
+          <Route path="/trainings/:id/exercises" exact component={RAddExercisesList} />
+          <Route path="/exercises/:id" exact component={Exercise} />
+          <Route path="/trainings/:id" exact component={RTraining} />
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <nav>
-          <p>
-            <Link to="/">Index</Link>
-          </p>
-          <p>
-            <Link to="/trainings">trainings</Link>
-          </p>
-          <p>
-            <Link to="/exercises">exercises</Link>
-          </p>
-        </nav>
-        <Route path="/list" component={List} />
-        <Route path="/exercises" exact component={ExercisesList} />
-        <Route path="/trainings" exact component={TrainingsList} />
-        <Route path="/trainings/:id/exercises" exact component={AddExercisesList} />
-        <Route path="/exercises/:id" exact component={Exercise} />
-        <Route path="/trainings/:id" exact component={Training} />
-      </div>
-    </Router>
+      </ConnectedRouter>
+    </Provider>
   );
 }
 
