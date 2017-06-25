@@ -1,8 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import List from '../list/List';
 import TrainingsStore from './TrainingsStore';
 import './TrainingsList.css';
+
+const getItem = item => (
+  <div className="List-item">
+    <Link to={`trainings/${item.id}`}>{item.title}</Link>
+  </div>
+);
 
 class TrainingsList extends React.Component {
   constructor(props) {
@@ -16,6 +23,7 @@ class TrainingsList extends React.Component {
       trainings: TrainingsStore.getAll(),
     });
   }
+
   addTraining() {
     this.setState(
       {
@@ -26,6 +34,7 @@ class TrainingsList extends React.Component {
       },
     );
   }
+
   render() {
     return (
       <div className="TrainingsList">
@@ -35,7 +44,7 @@ class TrainingsList extends React.Component {
         >
           Add
         </button>
-        <List items={this.state.trainings} root="/trainings" onItemClick={this.props.onItemClick} />
+        <List items={this.state.trainings} getItem={getItem} />
       </div>
     );
   }

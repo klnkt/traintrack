@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import TrainingsStore from './TrainingsStore';
 import history from '../history';
 
@@ -38,6 +39,16 @@ class Training extends React.Component {
     return element;
   }
 
+  getExercisesList() {
+    return (<div>
+      exercises list
+      {this.state.item.exercises.map(exercise =>
+        <div>{exercise.id} {exercise.title}</div>,
+      )}
+      <Link to={`/trainings/${this.state.item.id}/exercises`}>change</Link>
+    </div>
+    );
+  }
   toggleEditMode() {
     this.setState({
       isEditMode: !this.state.isEditMode,
@@ -58,6 +69,7 @@ class Training extends React.Component {
     return (
       <div className="Training">
         my id: {this.state.item.id}
+        {this.getExercisesList()}
         { this.state.isEditMode ?
           <input
             value={this.state.item.title}
