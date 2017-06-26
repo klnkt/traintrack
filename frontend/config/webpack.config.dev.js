@@ -134,16 +134,25 @@ module.exports = {
         exclude: [
           /\.html$/,
           /\.(js|jsx)$/,
-          /\.css$/,
+          /\.(css|scss)$/,
           /\.json$/,
           /\.bmp$/,
           /\.gif$/,
           /\.jpe?g$/,
           /\.png$/,
+          /\.(woff|woff2|ttf|eot)$/,
         ],
         loader: require.resolve('file-loader'),
         options: {
           name: 'static/media/[name].[hash:8].[ext]',
+        },
+      },
+      // fonts loader
+      {
+        test: /\.(woff|woff2|ttf|eot)$/,
+        loader: require.resolve('file-loader'),
+        options: {
+          name: 'static/fonts/[name].[ext]',
         },
       },
       // "url" loader works like "file" loader except that it embeds assets
@@ -176,7 +185,7 @@ module.exports = {
       // In production, we use a plugin to extract that CSS to a file, but
       // in development "style" loader enables hot editing of CSS.
       {
-        test: /\.css$/,
+        test: /\.(scss|css)$/,
         use: [
           require.resolve('style-loader'),
           {
@@ -202,6 +211,9 @@ module.exports = {
                 }),
               ],
             },
+          },
+          {
+            loader: require.resolve('sass-loader'),
           },
         ],
       },

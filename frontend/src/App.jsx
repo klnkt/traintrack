@@ -8,13 +8,13 @@ import history from './history';
 import List from './list/List';
 import reducersConfig from './ReducersConfig';
 import RTraining from './trainings/training/RTraining';
-import Exercise from './exercises/exercise/Exercise';
+import RExercise from './exercises/exercise/RExercise';
 import RTrainingsList from './trainings/trainings-list/RTrainingsList';
 import RExercisesList from './exercises/exercises-list/RExercisesList';
 import RAddExercisesList from './exercises/add-exercises/RAddExercisesList';
 
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 
 function App() {
   const store = createStore(
@@ -23,18 +23,22 @@ function App() {
       exercises: [{
         id: 1,
         title: 'foo',
+        sets: [10, 10],
       },
       {
         id: 2,
         title: 'bar',
+        sets: [10, 10],
       },
       {
         id: 3,
         title: 'baz',
+        sets: [10, 10],
       },
       {
         id: 4,
         title: 'qqq',
+        sets: [10, 10],
       }],
       trainings: [
         {
@@ -77,7 +81,7 @@ function App() {
           <Route path="/exercises" exact component={RExercisesList} />
           <Route path="/trainings" exact component={RTrainingsList} />
           <Route path="/trainings/:id/exercises" exact component={RAddExercisesList} />
-          <Route path="/exercises/:id" exact component={Exercise} />
+          <Route path="/exercises/:id" exact component={RExercise} />
           <Route path="/trainings/:id" exact component={RTraining} />
         </div>
       </ConnectedRouter>
