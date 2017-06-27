@@ -11,7 +11,7 @@ import RTraining from './trainings/training/RTraining';
 import RExercise from './exercises/exercise/RExercise';
 import RTrainingsList from './trainings/trainings-list/RTrainingsList';
 import RExercisesList from './exercises/exercises-list/RExercisesList';
-import RAddExercisesList from './exercises/add-exercises/RAddExercisesList';
+import RAddExercise from './exercises/add-exercise/RAddExercise';
 import Mock from './DataMock';
 
 import logo from './logo.svg';
@@ -48,9 +48,9 @@ function App() {
           <Route path="/list" component={List} />
           <Route path="/exercises" exact component={RExercisesList} />
           <Route path="/trainings" exact component={RTrainingsList} />
-          <Route path="/trainings/:id/exercises" exact component={RAddExercisesList} />
           <Route path="/exercises/:id" exact component={RExercise} />
-          <Route path="/trainings/:id" component={RTraining} />
+          <Route path="/trainings/:id" exact component={RTraining} />
+          <Route path="/trainings/:id/addexercise" component={RAddExercise} />
         </div>
       </ConnectedRouter>
     </Provider>

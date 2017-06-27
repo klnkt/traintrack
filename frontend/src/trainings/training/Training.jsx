@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ExerciseSets from '../../exercises/exercise-sets/ExerciseSets';
-import RAddExercise from '../../exercises/add-exercise/RAddExercise';
 import history from '../../history';
 
 import './Training.css';
@@ -42,7 +41,6 @@ class Training extends React.Component {
       <Link to={`${this.props.item.id}/addexercise`}>
         Add exercise
       </Link>
-      <Route path="/trainings/:id/addexercise" component={RAddExercise} />
       <button onClick={() => history.goBack()}>
         Go back
       </button>
