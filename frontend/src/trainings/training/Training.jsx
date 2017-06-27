@@ -1,28 +1,54 @@
 import React from 'react';
+import { Link, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import ExerciseSets from '../../exercises/exercise-sets/ExerciseSets';
+import RAddExercise from '../../exercises/add-exercise/RAddExercise';
 import history from '../../history';
 
 import './Training.css';
 
-const getExercisesList = item => (
-  <div>
-    exercises list
-    {item.exercises.map(exercise =>
-      <div>{exercise.id} {exercise.title}</div>,
-    )}
-    <Link to={`/trainings/${item.id}/exercises`}>change</Link>
-  </div>
-);
-const Training = props => (
-  <div className="Training">
-    my id: {props.item.id}
-    {getExercisesList(props.item)}
-    <button onClick={() => history.goBack()}>
-      Go back
-    </button>
-  </div>
-);
+class Training extends React.Component {
+  getExercisesList(exercises) {
+    const updateExercise = item =>
+      this.props.item.exercises.map((it) => {
+        if (it.id === item.id) {
+          return { ...it, ...item };
+        }
+        return it;
+      });
+    return (<div>
+      exercises list
+      {exercises.map(exercise =>
+        (<div>
+          {exercise.id} {exercise.title}
+          <ExerciseSets
+            sets={exercise.sets}
+            setState={partialState =>
+              this.props.save(
+                {
+                  ...this.props.item,
+                  exercises: updateExercise({ ...partialState, id: exercise.id }) },
+              )}
+          />
+        </div>),
+      )}
+    </div>);
+  }
+
+  render() {
+    return (<div className="Training">
+      my id: {this.props.item.id}
+      {this.getExercisesList(this.props.item.exercises)}
+      <Link to={`${this.props.item.id}/addexercise`}>
+        Add exercise
+      </Link>
+      <Route path="/trainings/:id/addexercise" component={RAddExercise} />
+      <button onClick={() => history.goBack()}>
+        Go back
+      </button>
+    </div>);
+  }
+}
 
 
 Training.propTypes = {
@@ -32,6 +58,7 @@ Training.propTypes = {
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
     })),
-  }),
+  }).isRequired,
+  save: PropTypes.func.isRequired,
 };
 export default Training;

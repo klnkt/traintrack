@@ -12,6 +12,7 @@ import RExercise from './exercises/exercise/RExercise';
 import RTrainingsList from './trainings/trainings-list/RTrainingsList';
 import RExercisesList from './exercises/exercises-list/RExercisesList';
 import RAddExercisesList from './exercises/add-exercises/RAddExercisesList';
+import Mock from './DataMock';
 
 import logo from './logo.svg';
 import './App.scss';
@@ -19,40 +20,7 @@ import './App.scss';
 function App() {
   const store = createStore(
     reducersConfig,
-    {
-      exercises: [{
-        id: 1,
-        title: 'foo',
-        sets: [10, 10],
-      },
-      {
-        id: 2,
-        title: 'bar',
-        sets: [10, 10],
-      },
-      {
-        id: 3,
-        title: 'baz',
-        sets: [10, 10],
-      },
-      {
-        id: 4,
-        title: 'qqq',
-        sets: [10, 10],
-      }],
-      trainings: [
-        {
-          id: 1,
-          title: 'first training',
-          exerciseIds: [1, 2],
-        },
-        {
-          id: 2,
-          title: 'second training',
-          exerciseIds: [3, 4],
-        },
-      ],
-    },
+    Mock,
     applyMiddleware(routerMiddleware(history)),
   );
   return (
@@ -82,7 +50,7 @@ function App() {
           <Route path="/trainings" exact component={RTrainingsList} />
           <Route path="/trainings/:id/exercises" exact component={RAddExercisesList} />
           <Route path="/exercises/:id" exact component={RExercise} />
-          <Route path="/trainings/:id" exact component={RTraining} />
+          <Route path="/trainings/:id" component={RTraining} />
         </div>
       </ConnectedRouter>
     </Provider>

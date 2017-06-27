@@ -41,19 +41,13 @@ class AddExercisesList extends React.Component {
     history.goBack();
   }
   render() {
-    return (<div className="AddExercisesList">
-      Selected
-      <List
-        items={this.state.exercises.filter(item => item.isSelected)}
-        getItem={item => this.getItem(item)}
-      />
-      Not selected
-      <List
-        items={this.state.exercises.filter(item => !item.isSelected)}
-        getItem={item => this.getItem(item)}
-      />
-      <button onClick={() => this.save()}> save </button>
-    </div>);
+    return (
+      <div className="AddExercisesList">
+        <List
+          items={this.state.exercises}
+          getItem={item => this.getItem(item)}
+        />
+      </div>);
   }
 }
 
