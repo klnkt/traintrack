@@ -1,0 +1,24 @@
+.spoiler__trigger {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: inherit;
+    outline: none;
+    @extend .grey-text, .text-darken-2;
+    &:hover,
+    &--active {
+      @extend .black-text;
+    }
+    
+}
+.spoiler__trigger-icon {
+  transition: transform 0.2s ease-out;
+}
+.spoiler__trigger-icon--flipped {
+  transform: rotateX(180deg);
+}
+.spoiler__content--hidden {
+  display: none;
+}

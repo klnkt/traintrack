@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './ExerciseSets.css';
-/* eslint no-console: 0 */
+import './ExerciseSets.scss';
+
 class ExerciseSets extends React.Component {
   constructor(props) {
-    console.log(props);
     super(props);
+    this.state = { count: props.sets.length ? props.sets[0] : 10 };
   }
 
   addSet(event) {
     event.preventDefault();
     event.stopPropagation();
     this.props.setState({
-      sets: [...this.props.sets, event.target.elements[0].value],
+      sets: [...this.props.sets, this.state.count],
     });
   }
 
@@ -23,19 +23,65 @@ class ExerciseSets extends React.Component {
     });
   }
 
+  updateCount(value) {
+    this.setState({
+      count: this.state.count + value,
+    });
+  }
   render() {
     return (
-      <div className="Sets">
-        {
-          this.props.sets.map((set, index) => (
-            <div className="Set">
-              {set}
-              <button onClick={() => this.deleteSet(index)}>delete</button>
-            </div>))
-        }
-        <form className="AddSet" onSubmit={evt => this.addSet(evt)}>
-          <input type="number" name="repetitons" />
-          <input type="submit" value="add" />
+      <div>
+        <ul className="collection with-header">
+          {
+            this.props.sets.map((set, index) => (
+              <div className="collection-item exercise-sets__set">
+                <span className="exercise-sets__set-count">{set}</span>
+                <button
+                  className="waves-effect waves-light  red lighten-2 btn-flat white-text"
+                  onClick={() => this.deleteSet(index)}
+                >
+                  delete
+                </button>
+              </div>))
+          }
+        </ul>
+        <form
+          onSubmit={evt => this.addSet(evt)}
+        >
+          <div className="exercise-sets__selector">
+            <button
+              type="button"
+              className={`btn btn-floating exercise-sets__counter-action 
+              ${this.state.count <= 0 ? 'disabled' : ''}`}
+              onClick={() => this.updateCount(-1)}
+            >
+              <i className="material-icons">remove</i>
+            </button>
+            <div className="input-field inline exercise-sets__input">
+              <input
+                type="number"
+                name="repetitons"
+                id="repetitions"
+                className="exercise-sets__selector-value"
+                value={this.state.count}
+                readOnly
+              />
+              <label
+                className="active"
+                htmlFor="repetitons"
+              >
+                  Repetitons
+              </label>
+            </div>
+            <button
+              type="button"
+              className="btn btn-floating exercise-sets__counter-action"
+              onClick={() => this.updateCount(1)}
+            >
+              <i className="material-icons">add</i>
+            </button>
+          </div>
+          <input type="submit" value="add" className="waves-effect waves-light btn" />
         </form>
       </div>
     );

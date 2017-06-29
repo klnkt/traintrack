@@ -5,11 +5,12 @@ import './List.css';
 /* eslint "react/no-unused-prop-types":0 */
 function List(props) {
   return (
-    <div className="List">
+    <ul className="collection">
       {
-        props.items.map(item => props.getItem(item))
+        props.items.map(item =>
+          <li className="collection-item">{props.getItem(item)}</li>)
       }
-    </div>
+    </ul>
   );
 }
 

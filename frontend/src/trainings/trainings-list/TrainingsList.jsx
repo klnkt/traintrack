@@ -6,19 +6,21 @@ import List from '../../list/List';
 import './TrainingsList.css';
 
 const getItem = item => (
-  <div className="List-item">
+  <div>
     <Link to={`trainings/${item.id}`}>{item.title}</Link>
   </div>
 );
 
 const TrainingsList = props => (
   <div className="TrainingsList">
-    <button
-      className="TrainingsListAdd"
-      onClick={() => props.addTraining()}
-    >
-      Add
-    </button>
+    <div className="fixed-action-btn">
+      <button
+        onClick={() => props.addTraining()}
+        className="btn-floating btn-large red"
+      >
+        <i className="material-icons">add</i>
+      </button>
+    </div>
     <List items={props.trainings} getItem={getItem} />
   </div>
 );
