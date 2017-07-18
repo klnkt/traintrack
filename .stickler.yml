@@ -1,0 +1,5 @@
+linters:
+    eslint:
+        config: './frontend/.eslintrc'
+files:
+    ignore: ['frontend/config/*', 'frontend/scripts/*']
