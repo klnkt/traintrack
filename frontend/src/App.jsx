@@ -16,8 +16,8 @@ import Mock from './DataMock';
 
 import './App.scss';
 
-function App() {
-  const store = createStore(
+function App()  {
+  const store = createStore(  
     reducersConfig,
     Mock,
     applyMiddleware(routerMiddleware(history)),
