@@ -1,85 +1,74 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import history from '../../history';
+// import RExerciseProperties from '../exercise-properties/RExerciseProperties';
 import './Exercise.css';
 
 class Exercise extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = props.exercise;
+  componentWillMount() {
+    if (this.props.match.params.id) {
+      this.props.setExercise(parseInt(this.props.match.params.id, 10));
+    }
   }
   onInputChange({ target }) {
-    this.setState({
+    this.props.onChange({
       [target.name]: target.value,
     });
   }
 
-  // getSets() {
-  //   return (
-  //     <div className="Sets">
-  //       {
-  //         this.state.sets.map((set, index) => (
-  //           <div className="Set">
-  //             {set}
-  //             <button onClick={() => this.deleteSet(index)}>delete</button>
-  //           </div>))
-  //       }
-  //     </div>
-  //   );
-  // }
-
-  // addSet(event) {
-  //   event.preventDefault();
-  //   event.stopPropagation();
-  //   this.setState({
-  //     sets: [...this.state.sets, event.target.elements[0].value],
-  //   });
-  // }
-
-  // deleteSet(index) {
-  //   this.setState({
-  //     sets: this.state.sets.filter((item, i) => i !== index),
-  //   });
-  // }
-
   save(event) {
     event.preventDefault();
     event.stopPropagation();
-    this.props.save(this.state);
+    this.props.save(this.props.exercise.isNew);
     history.goBack();
   }
 
   render() {
     return (
-      <div className="Exercise">
+      <div className="exercise">
         <form name="exercise" onSubmit={evt => this.save(evt)}>
-          my id: {this.state.id}
-          <input
-            type="text"
-            name="title"
-            value={this.state.title}
-            onChange={evt => this.onInputChange(evt)}
-          />
-          <input type="submit" value="save" />
+          <div className="input-field">
+            <input
+              type="text"
+              name="title"
+              id="exercise-title"
+              value={this.props.exercise.title}
+              onChange={evt => this.onInputChange(evt)}
+            />
+            <label className="active" htmlFor="exercise-title">Exercise</label>
+          </div>
+          <button type="submit" className="btn-flat">
+            save
+          </button>
+          <button type="button" className="btn-flat" onClick={() => this.props.goBack()}>
+            back
+          </button>
         </form>
       </div>
     );
-    /*
-          {this.getSets()}
-          <form className="AddSet" onSubmit={evt => this.addSet(evt)}>
-            <input type="number" name="repetitons" />
-            <input type="submit" value="add" />
-          </form>
-    */
   }
 }
 
 Exercise.propTypes = {
   exercise: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.number,
     title: PropTypes.string.isRequired,
-    //sets: PropTypes.arrayOf(PropTypes.number).isRequired,
+    isNew: PropTypes.bool.isRequired,
+  }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
   save: PropTypes.func.isRequired,
+  setExercise: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  goBack: PropTypes.func.isRequired,
+};
+
+Exercise.defaultPropTypes = {
+  exercise: {
+    id: null,
+  },
 };
 export default Exercise;

@@ -1,20 +1,29 @@
 export default {
-  exercises: [{
-    id: 1,
-    title: 'foo',
+  exercises: {
+    list:
+    [{
+      id: 1,
+      title: 'foo',
+    },
+    {
+      id: 2,
+      title: 'bar',
+    },
+    {
+      id: 3,
+      title: 'baz',
+    },
+    {
+      id: 4,
+      title: 'qqq',
+    }],
+    edited: {
+      id: null,
+      properties: [],
+      title: '',
+      isNew: true,
+    },
   },
-  {
-    id: 2,
-    title: 'bar',
-  },
-  {
-    id: 3,
-    title: 'baz',
-  },
-  {
-    id: 4,
-    title: 'qqq',
-  }],
   trainings: [
     {
       id: 1,

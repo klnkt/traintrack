@@ -1,14 +1,25 @@
 export const actions = {
   ADD_EXERCISE: 'ADD_EXERCISE',
   UPDATE_EXERCISE: 'UPDATE_EXERCISE',
+  ADD_PROPERTY: 'ADD_PROPERTY',
+  CHANGE: 'CHANGE',
+  SET_EDITED_EXERCISE: 'SET_EDITED_EXERCISE',
 };
 
-export const addExercise = exercise => ({
+export const addExercise = () => ({
   type: actions.ADD_EXERCISE,
-  exercise,
 });
 
-export const updateExercise = exercise => ({
+export const updateExercise = () => ({
   type: actions.UPDATE_EXERCISE,
-  exercise,
+});
+
+export const setEditedExercise = (exerciseId = null) => ({
+  type: actions.SET_EDITED_EXERCISE,
+  exerciseId,
+});
+
+export const changeEditedExercise = changes => ({
+  type: actions.CHANGE,
+  changes,
 });

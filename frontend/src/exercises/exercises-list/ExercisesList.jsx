@@ -5,18 +5,28 @@ import List from '../../list/List';
 
 import './ExercisesList.scss';
 
-const getItem = item => (
-  <div className="List-item">
-    <Link to={`exercises/${item.id}`}>{item.title}</Link>
-  </div>
-);
-
-const ExercisesList = props => (
-  <div className="exercises-list">
-    <List items={props.exercises} getItem={props.getItem} />
-    <button onClick={props.addExercise}>add</button>
-  </div>
-);
+const ExercisesList = (props) => {
+  const getItem = item => (
+    <div className="List-item">
+      <Link to={`/exercises/${item.id}`}>
+        {item.title}
+      </Link>
+    </div>
+  );
+  return (
+    <div className="exercises-list">
+      <List items={props.exercises} getItem={getItem} />
+      <div className="fixed-action-btn">
+        <Link
+          to="/exercises/add"
+          className="btn-floating btn-large red"
+        >
+          <i className="material-icons">add</i>
+        </Link>
+      </div>
+    </div>
+  );
+};
 
 ExercisesList.propTypes = {
   exercises: PropTypes.arrayOf(
@@ -25,10 +35,6 @@ ExercisesList.propTypes = {
       title: PropTypes.string.isRequired,
     }),
   ).isRequired,
-  addExercise: PropTypes.func.isRequired,
-  getItem: PropTypes.func,
 };
-ExercisesList.defaultProps = {
-  getItem,
-};
+
 export default ExercisesList;

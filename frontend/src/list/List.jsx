@@ -8,7 +8,7 @@ function List(props) {
     <ul className="collection">
       {
         props.items.map(item =>
-          <li className="collection-item">{props.getItem(item)}</li>)
+          <li className="collection-item" key={item.id}>{props.getItem(item)}</li>)
       }
     </ul>
   );
