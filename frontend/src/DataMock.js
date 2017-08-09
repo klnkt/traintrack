@@ -1,21 +1,25 @@
 export default {
-  exercises: {
+  exerciseTypes: {
     list:
     [{
       id: 1,
       title: 'foo',
+      properties: [],
     },
     {
       id: 2,
       title: 'bar',
+      properties: [],
     },
     {
       id: 3,
       title: 'baz',
+      properties: [],
     },
     {
       id: 4,
       title: 'qqq',
+      properties: [],
     }],
     edited: {
       id: null,
@@ -24,28 +28,4 @@ export default {
       isNew: true,
     },
   },
-  trainings: [
-    {
-      id: 1,
-      title: 'first training',
-      exercises: [{
-        id: 1,
-        sets: [10, 10],
-      }, {
-        id: 2,
-        sets: [10, 10],
-      }],
-    },
-    {
-      id: 2,
-      title: 'second training',
-      exercises: [{
-        id: 3,
-        sets: [10, 10],
-      }, {
-        id: 4,
-        sets: [10, 10],
-      }],
-    },
-  ],
 };

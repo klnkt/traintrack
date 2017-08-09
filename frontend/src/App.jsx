@@ -4,9 +4,11 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import history from './history';
 import store from './store';
-import List from './list/List';
-import RExercisesList from './exercises/exercises-list/RExercisesList';
-import RAddExercise from './exercises/add-exercise/RAddExercise';
+import RExercisesList from './exercises/list/RExercisesList';
+import RExerciseTypesList from './exercise-types/list/RExerciseTypesList';
+import RExerciseSelectType from './exercise-types/list/RExerciseSelectType';
+import RAddExerciseType from './exercise-types/exercise/RAddExercise';
+import RAddExercise from './exercises/add/RAddExercise';
 import './App.scss';
 
 function App() {
@@ -21,15 +23,20 @@ function App() {
                   <Link to="/">Index</Link>
                 </li>
                 <li>
+                  <Link to="/types">types</Link>
+                </li>
+                <li>
                   <Link to="/exercises">exercises</Link>
                 </li>
               </ul>
             </div>
           </nav>
           <div className="container">
-            <Route path="/list" component={List} />
+            <Route path="/types" exact component={RExerciseTypesList} />
+            <Route path="/types/:id" exact component={RAddExerciseType} />
+            <Route path="/select/type" exact component={RExerciseSelectType} />
             <Route path="/exercises" exact component={RExercisesList} />
-            <Route path="/exercises/:id" exact component={RAddExercise} />
+            <Route path="/exercises/add" exact component={RAddExercise} />
           </div>
         </div>
       </ConnectedRouter>

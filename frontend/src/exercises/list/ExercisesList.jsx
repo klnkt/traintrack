@@ -18,7 +18,7 @@ const ExercisesList = (props) => {
       <List items={props.exercises} getItem={getItem} />
       <div className="fixed-action-btn">
         <Link
-          to="/exercises/add"
+          to="/select/type"
           className="btn-floating btn-large red"
         >
           <i className="material-icons">add</i>

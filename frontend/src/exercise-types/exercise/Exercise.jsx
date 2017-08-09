@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import history from '../../history';
-// import RExerciseProperties from '../exercise-properties/RExerciseProperties';
+import RExerciseProperties from '../properties/RExerciseProperties';
 import './Exercise.css';
 
 class Exercise extends React.Component {
@@ -26,7 +26,17 @@ class Exercise extends React.Component {
   render() {
     return (
       <div className="exercise">
-        <form name="exercise" onSubmit={evt => this.save(evt)}>
+        <form
+          name="exerciseType"
+          id="exerciseType"
+          onSubmit={(evt) => {
+            evt.preventDefault();
+            evt.stopPropagation();
+            if (evt.target.checkValidity()) {
+              this.save(evt);
+            }
+          }}
+        >
           <div className="input-field">
             <input
               type="text"
@@ -34,16 +44,18 @@ class Exercise extends React.Component {
               id="exercise-title"
               value={this.props.exercise.title}
               onChange={evt => this.onInputChange(evt)}
+              required
             />
             <label className="active" htmlFor="exercise-title">Exercise</label>
           </div>
-          <button type="submit" className="btn-flat">
-            save
-          </button>
-          <button type="button" className="btn-flat" onClick={() => this.props.goBack()}>
-            back
-          </button>
         </form>
+        <RExerciseProperties />
+        <button type="submit" className="btn-flat" form="exerciseType">
+          save
+        </button>
+        <button type="button" className="btn-flat" onClick={() => this.props.goBack()}>
+          back
+        </button>
       </div>
     );
   }

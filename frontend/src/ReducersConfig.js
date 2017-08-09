@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
+import exerciseTypes from './exercise-types/Reducers';
 import exercises from './exercises/Reducers';
-import trainings from './trainings/Reducers';
 
 const reducersConfig = combineReducers({
+  exerciseTypes,
   exercises,
-  trainings,
   route: routerReducer,
 });
 
