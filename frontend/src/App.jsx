@@ -7,7 +7,7 @@ import store from './store';
 import RExercisesList from './exercises/list/RExercisesList';
 import RExerciseTypesList from './exercise-types/list/RExerciseTypesList';
 import RExerciseSelectType from './exercise-types/list/RExerciseSelectType';
-import RAddExerciseType from './exercise-types/exercise/RAddExercise';
+import RAddExerciseType from './exercise-types/exercise/RAddExerciseType';
 import RAddExercise from './exercises/add/RAddExercise';
 import './App.scss';
 
@@ -36,7 +36,7 @@ function App() {
             <Route path="/types/:id" exact component={RAddExerciseType} />
             <Route path="/select/type" exact component={RExerciseSelectType} />
             <Route path="/exercises" exact component={RExercisesList} />
-            <Route path="/exercises/add" exact component={RAddExercise} />
+            <Route path="/add/exercise" exact component={RAddExercise} />
           </div>
         </div>
       </ConnectedRouter>

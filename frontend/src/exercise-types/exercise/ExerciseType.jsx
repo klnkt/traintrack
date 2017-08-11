@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import history from '../../history';
 import RExerciseProperties from '../properties/RExerciseProperties';
-import './Exercise.css';
+import './ExerciseType.css';
 
-class Exercise extends React.Component {
+class ExerciseType extends React.Component {
   componentWillMount() {
     if (this.props.match.params.id) {
       this.props.setExercise(parseInt(this.props.match.params.id, 10));
@@ -61,7 +61,7 @@ class Exercise extends React.Component {
   }
 }
 
-Exercise.propTypes = {
+ExerciseType.propTypes = {
   exercise: PropTypes.shape({
     id: PropTypes.number,
     title: PropTypes.string.isRequired,
@@ -78,9 +78,9 @@ Exercise.propTypes = {
   goBack: PropTypes.func.isRequired,
 };
 
-Exercise.defaultPropTypes = {
+ExerciseType.defaultPropTypes = {
   exercise: {
     id: null,
   },
 };
-export default Exercise;
+export default ExerciseType;

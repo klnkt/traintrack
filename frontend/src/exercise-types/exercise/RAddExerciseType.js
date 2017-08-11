@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { goBack } from 'react-router-redux';
 import { addExerciseType, updateExerciseType, setEditedExerciseType, changeEditedExerciseType } from '../Actions';
-import Exercise from './Exercise';
+import ExerciseType from './ExerciseType';
 /* eslint no-console: 0 */
 const mapStateToProps = state => ({ exercise: state.exerciseTypes.edited });
 
@@ -13,10 +13,10 @@ const mapDispatchToProps = dispatch => ({
   setExercise: exerciseId => dispatch(setEditedExerciseType(exerciseId)),
   onChange: changes => dispatch(changeEditedExerciseType(changes)),
 });
-const RAddExercise = connect(
+const RAddExerciseType = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Exercise);
+)(ExerciseType);
 
-export default RAddExercise;
+export default RAddExerciseType;
 
