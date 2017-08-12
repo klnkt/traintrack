@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setEditedExerciseType: item => dispatch(setEditedExerciseType(item)),
-  goToExercise: () => dispatch(push('/exercises/add')),
+  goToExercise: () => dispatch(push('/add/exercise')),
 });
 const RExerciseSelectType = connect(
   mapStateToProps,

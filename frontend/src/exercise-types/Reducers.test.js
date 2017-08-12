@@ -14,7 +14,7 @@ it('gets initial state', () => {
   });
 });
 
-it('should handle ADD_EXERCISE', () => {
+it('should handle ADD_EXERCISE_TYPE', () => {
   const newExercise = {
     id: null,
     title: 'foo',
@@ -24,14 +24,14 @@ it('should handle ADD_EXERCISE', () => {
     list: [],
     edited: newExercise,
   }, {
-    type: actions.ADD_EXERCISE,
+    type: actions.ADD_EXERCISE_TYPE,
   })).toEqual({
     list: [{ ...newExercise, id: 1 }],
     edited: newExercise,
   });
 });
 
-it('should handle UPDATE_EXERCISE', () => {
+it('should handle UPDATE_EXERCISE_TYPE', () => {
   const newExercise = {
     id: 5,
     title: 'foo',
@@ -41,14 +41,14 @@ it('should handle UPDATE_EXERCISE', () => {
     list: [{ id: 5 }, { id: 6 }, { id: 8 }],
     edited: newExercise,
   }, {
-    type: actions.UPDATE_EXERCISE,
+    type: actions.UPDATE_EXERCISE_TYPE,
   })).toEqual({
     list: [newExercise, { id: 6 }, { id: 8 }],
     edited: newExercise,
   });
 });
 
-it('should handle CHANGE', () => {
+it('should handle CHANGE_EDITED_EXERCISE_TYPE', () => {
   const newExercise = {
     id: null,
     title: 'foo',
@@ -59,7 +59,7 @@ it('should handle CHANGE', () => {
     list: [],
     edited: newExercise,
   }, {
-    type: actions.CHANGE,
+    type: actions.CHANGE_EDITED_EXERCISE_TYPE,
     changes: {
       title: 'bar',
       properties: ['fag, bag'],
@@ -75,13 +75,13 @@ it('should handle CHANGE', () => {
   });
 });
 
-describe('should handle SET_EDITED_EXERCISE', () => {
+describe('should handle SET_EDITED_EXERCISE_TYPE', () => {
   it('should handle setting empty exercise', () => {
     expect(reducer({
       list: [],
       edited: {},
     }, {
-      type: actions.SET_EDITED_EXERCISE,
+      type: actions.SET_EDITED_EXERCISE_TYPE,
       exerciseId: -1,
     })).toEqual({
       list: [],
@@ -93,7 +93,7 @@ describe('should handle SET_EDITED_EXERCISE', () => {
       list: [{ id: 1, title: 'foo' }, { id: 2 }],
       edited: {},
     }, {
-      type: actions.SET_EDITED_EXERCISE,
+      type: actions.SET_EDITED_EXERCISE_TYPE,
       exerciseId: 1,
     })).toEqual({
       list: [{ id: 1, title: 'foo', isNew: false }, { id: 2 }],

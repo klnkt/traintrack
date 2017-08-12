@@ -17,18 +17,23 @@ const exercises = (state = { list: [], edited: {} }, action) => {
         list: [...state.list, { ...state.edited, id: newId }],
       };
     }
-    case actions.SET_EDITED_EXERCISE:
+    case actions.SET_EDITED_EXERCISE: {
+      let date = new Date();
+      date.setHours(0, 0, 0, 0);
+      date = date.toISOString().split('T')[0];
       return {
         ...state,
         edited: {
           ...state.edited,
           typeId: action.exerciseType.id,
           title: action.exerciseType.title,
+          date,
           properties: action.exerciseType.properties.map(item =>
             ({ ...item, value: 0 }),
           ),
         },
       };
+    }
     case actions.UPDATE_EDITED_EXERCISE_PROPERTY:
       return {
         ...state,
