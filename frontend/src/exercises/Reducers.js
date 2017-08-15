@@ -18,9 +18,20 @@ const exercises = (state = { list: [], edited: {} }, action) => {
       };
     }
     case actions.SET_EDITED_EXERCISE: {
-      let date = new Date();
+      let properties;
+      const date = new Date();
       date.setHours(0, 0, 0, 0);
-      date = date.toISOString().split('T')[0];
+      const exercisesOfType = state.list.filter(
+        item => item.typeId === action.exerciseType.id,
+      );
+      if (exercisesOfType.length) {
+        properties = exercisesOfType[exercisesOfType.length - 1]
+          .properties.map(item => ({ ...item }));
+      } else {
+        properties = action.exerciseType.properties.map(item =>
+            ({ ...item, value: 0 }),
+          );
+      }
       return {
         ...state,
         edited: {
@@ -28,9 +39,7 @@ const exercises = (state = { list: [], edited: {} }, action) => {
           typeId: action.exerciseType.id,
           title: action.exerciseType.title,
           date,
-          properties: action.exerciseType.properties.map(item =>
-            ({ ...item, value: 0 }),
-          ),
+          properties,
         },
       };
     }

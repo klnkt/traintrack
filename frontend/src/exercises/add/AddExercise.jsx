@@ -60,7 +60,7 @@ AddExercise.propTypes = {
   exercise: PropTypes.shape({
     typeId: PropTypes.number.id,
     title: PropTypes.string,
-    date: PropTypes.objectOf(Date),
+    date: PropTypes.string,
   }).isRequired,
   save: PropTypes.func.isRequired,
   returnToList: PropTypes.func.isRequired,

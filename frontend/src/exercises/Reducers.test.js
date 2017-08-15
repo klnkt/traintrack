@@ -40,35 +40,79 @@ describe('ADD_EXERCISE', () => {
   });
 });
 
-it('should handle SET_EDITED_EXERCISE', () => {
-  const exerciseType = {
-    id: 5,
-    title: 'foo',
-    properties: [{ title: '1' }, { title: '2' }],
-  };
-  let date = new Date();
-  date.setHours(0, 0, 0, 0);
-  date = date.toISOString().split('T')[0]; 
-  expect(reducer({
-    list: [],
-    edited: {},
-  }, {
-    type: actions.SET_EDITED_EXERCISE,
-    exerciseType,
-  })).toEqual({
-    list: [],
-    edited: {
+describe('SET_EDITED_EXERCISE', () => {
+  it('should handle SET_EDITED_EXERCISE when it\'s first of type', () => {
+    const exerciseType = {
+      id: 5,
+      title: 'foo',
+      properties: [{ title: '1' }, { title: '2' }],
+    };
+    const date = new Date();
+    date.setHours(0, 0, 0, 0);
+
+    expect(reducer({
+      list: [],
+      edited: {},
+    }, {
+      type: actions.SET_EDITED_EXERCISE,
+      exerciseType,
+    })).toEqual({
+      list: [],
+      edited: {
+        typeId: exerciseType.id,
+        title: exerciseType.title,
+        date,
+        properties: [{
+          title: '1',
+          value: 0,
+        }, {
+          title: '2',
+          value: 0,
+        }],
+      },
+    });
+  });
+
+  it('should handle SET_EDITED_EXERCISE when exercises with given type exist', () => {
+    const exerciseType = {
+      id: 5,
+      title: 'foo',
+      properties: [{ title: '1' }, { title: '2' }],
+    };
+    const list = [{
       typeId: exerciseType.id,
-      title: exerciseType.title,
-      date,
       properties: [{
         title: '1',
-        value: 0,
+        value: 10,
       }, {
         title: '2',
-        value: 0,
+        value: 15,
       }],
-    },
+    }];
+    const date = new Date();
+    date.setHours(0, 0, 0, 0);
+
+    expect(reducer({
+      list,
+      edited: {},
+    }, {
+      type: actions.SET_EDITED_EXERCISE,
+      exerciseType,
+    })).toEqual({
+      list,
+      edited: {
+        typeId: exerciseType.id,
+        title: exerciseType.title,
+        date,
+        properties: [{
+          title: '1',
+          value: 10,
+        }, {
+          title: '2',
+          value: 15,
+        }],
+      },
+    });
   });
 });
 

@@ -5,6 +5,7 @@ import { ConnectedRouter } from 'react-router-redux';
 import history from './history';
 import store from './store';
 import RExercisesList from './exercises/list/RExercisesList';
+import RExercisesByDateList from './exercises/list-by-date/RExercisesByDateList';
 import RExerciseTypesList from './exercise-types/list/RExerciseTypesList';
 import RExerciseSelectType from './exercise-types/list/RExerciseSelectType';
 import RAddExerciseType from './exercise-types/exercise/RAddExerciseType';
@@ -28,6 +29,9 @@ function App() {
                 <li>
                   <Link to="/exercises">exercises</Link>
                 </li>
+                <li>
+                  <Link to="/dates">dates</Link>
+                </li>
               </ul>
             </div>
           </nav>
@@ -37,6 +41,7 @@ function App() {
             <Route path="/select/type" exact component={RExerciseSelectType} />
             <Route path="/exercises" exact component={RExercisesList} />
             <Route path="/add/exercise" exact component={RAddExercise} />
+            <Route path="/dates" exact component={RExercisesByDateList} />
           </div>
         </div>
       </ConnectedRouter>

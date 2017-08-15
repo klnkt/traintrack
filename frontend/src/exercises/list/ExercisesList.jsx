@@ -9,7 +9,7 @@ const ExercisesList = (props) => {
   const getItem = item => (
     <div className="List-item">
       <Link to={`/exercises/${item.id}`}>
-        {item.title} {item.date}
+        {item.title} {item.date.toISOString().split('T')[0]}
       </Link>
     </div>
   );
