@@ -10,6 +10,7 @@ import RExerciseTypesList from './exercise-types/list/RExerciseTypesList';
 import RExerciseSelectType from './exercise-types/list/RExerciseSelectType';
 import RAddExerciseType from './exercise-types/exercise/RAddExerciseType';
 import RAddExercise from './exercises/add/RAddExercise';
+import AddExerciseType from './new-exercise/AddExerciseType';
 import './App.scss';
 
 function App() {
@@ -32,6 +33,9 @@ function App() {
                 <li>
                   <Link to="/dates">dates</Link>
                 </li>
+                <li>
+                  <Link to="/add-new">add new</Link>
+                </li>
               </ul>
             </div>
           </nav>
@@ -42,6 +46,8 @@ function App() {
             <Route path="/exercises" exact component={RExercisesList} />
             <Route path="/add/exercise" exact component={RAddExercise} />
             <Route path="/dates" exact component={RExercisesByDateList} />
+            <Route path="/dates" exact component={RExercisesByDateList} />
+            <Route path="/add-new" exact component={AddExerciseType} />
           </div>
         </div>
       </ConnectedRouter>
